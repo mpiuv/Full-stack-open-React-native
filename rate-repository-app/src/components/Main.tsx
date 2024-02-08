@@ -1,21 +1,22 @@
 import Constants from 'expo-constants';
 import { Text, StyleSheet, View } from 'react-native';
-import { SafeAreaView } from 'react-native-web';
+import { SafeAreaView } from 'react-native';
+import AppBar from './AppBar';
+import theme from '../theme'
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: Constants.statusBarHeight,
     flexGrow: 1,
     flexShrink: 1,
+    backgroundColor: theme.colors.appBackGround,
   },
 });
 
-const Main = () => {
+const Main = ():JSX.Element => {
   return (
-    <SafeAreaView style={styles.container}>
-      <Text>Rate Repository Application</Text>
-    </SafeAreaView>
+    <AppBar />    
   );
+
 };
 
 export default Main;
