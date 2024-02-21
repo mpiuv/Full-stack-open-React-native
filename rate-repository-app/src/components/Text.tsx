@@ -26,8 +26,10 @@ const styles = StyleSheet.create({
   },
 });
 
+type colorT='textSecondary'|'primary'|'white';
+
 const Text = ({ color, fontSize, fontWeight, style, ...props }:
-              {color:any, fontSize:any, fontWeight:any, style:any}) => {
+              {color?:colorT, fontSize?:any, fontWeight?:any, style?:any}) => {
   const textStyle = [
     styles.text,
     color === 'textSecondary' && styles.colorTextSecondary,

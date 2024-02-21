@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
   // ...
 });
 
-const AppBar = ():JSX.Element => {
+const AppBar = ():React.JSX.Element => {
   return (<Pressable onPress={()=>{}}>
     <View style={styles.container}><Text color="white" fontWeight="bold">Repositories </Text></View></Pressable>)
 

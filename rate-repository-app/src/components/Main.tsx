@@ -3,6 +3,7 @@ import { Text, StyleSheet, View } from 'react-native';
 import { SafeAreaView } from 'react-native';
 import AppBar from './AppBar';
 import theme from '../theme'
+import React from 'react';
 
 const styles = StyleSheet.create({
   container: {
@@ -12,7 +13,7 @@ const styles = StyleSheet.create({
   },
 });
 
-const Main = ():JSX.Element => {
+const Main = ():React.JSX.Element => {
   return (
     <AppBar />    
   );
