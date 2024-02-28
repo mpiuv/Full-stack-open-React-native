@@ -1,13 +1,19 @@
 import { View } from 'react-native';
-import { JSX } from 'react';
+import { NativeRouter } from 'react-router-native';
 import RepositoryList from './src/components/RepositoryList';
 import Main from './src/components/Main';
 import React from 'react';
 const App = ():React.JSX.Element => {
-  return (<View style={{backgroundColor:'#e1e4e8'}}>
+  return ( <>
+           <NativeRouter>
            <Main/>
-           <RepositoryList />
-         </View>)
+           </NativeRouter>
+         </>
+        )
+//        <View style={{backgroundColor:'#e1e4e8'}}>
+//</View>
+
+
 };
 
 export default App;
