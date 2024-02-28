@@ -1,4 +1,4 @@
-import { View, StyleSheet, Pressable } from 'react-native';
+import { View, StyleSheet, ScrollView,Pressable } from 'react-native';
 import Constants from 'expo-constants';
 import React from 'react';
 import Text from './Text';
@@ -21,8 +21,10 @@ const styles = StyleSheet.create({
 
 const AppBar = ():React.JSX.Element => {
   return (<><View style={styles.container}>
+    <ScrollView horizontal showsHorizontalScrollIndicator={false}>
     <Link to='/'><Text color="white" fontWeight="bold">Repositories </Text></Link>
     <Link to='/signin'><Text color="white" fontWeight="bold">Sign In </Text></Link>
+    </ScrollView>
     </View>
     </>)
 
