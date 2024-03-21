@@ -4,7 +4,7 @@ import React from 'react';
 import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
 import Constants from "expo-constants"
 const client = new ApolloClient({
-  uri: "http://10.1.2.76:4000", cache: new InMemoryCache()
+  uri: Constants.expoConfig.extra.APOLLO_URI, cache: new InMemoryCache()
 });
 const App = ():React.JSX.Element => {
   return ( <>
