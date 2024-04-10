@@ -1,16 +1,19 @@
 import { NativeRouter } from 'react-router-native';
+import { ApolloProvider } from '@apollo/client';
 import Main from './src/components/Main';
 import React from 'react';
-import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
-import Constants from "expo-constants"
-const client = new ApolloClient({
-  uri: Constants.expoConfig.extra.APOLLO_URI, cache: new InMemoryCache()
-});
+import createApolloClient from './src/utils/apolloClient';
+import AuthStorage from './src/utils/authStorage';
+import AuthStorageContext from './src/contexts/AuthStorageContext';
+const authStorage = new AuthStorage();
+const apolloClient = createApolloClient(authStorage);
 const App = ():React.JSX.Element => {
   return ( <>
            <NativeRouter>
-             <ApolloProvider client={client}>
-               <Main/>
+             <ApolloProvider client={apolloClient}>
+               <AuthStorageContext.Provider value={authStorage}>
+                 <Main/>
+                </AuthStorageContext.Provider>
              </ApolloProvider>
            </NativeRouter>
          </>
