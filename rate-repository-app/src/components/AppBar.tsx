@@ -4,6 +4,7 @@ import React from 'react';
 import Text from './Text';
 import theme from '../theme';
 import { Link } from 'react-router-native';
+import useSignOut from "../hooks/useSignOut"
 
 const styles = StyleSheet.create({
   container: {
@@ -20,10 +21,16 @@ const styles = StyleSheet.create({
 });
 
 const AppBar = ():React.JSX.Element => {
+  const { signOut, data, loading } = useSignOut()
+
   return (<><View style={styles.container}>
     <ScrollView horizontal showsHorizontalScrollIndicator={false}>
     <Link to='/'><Text color="white" fontWeight="bold">Repositories </Text></Link>
-    <Link to='/signin'><Text color="white" fontWeight="bold">Sign In </Text></Link>
+    {!loading && data.me ? 
+      (<Link to='/' onPress={signOut}><Text color="white" fontWeight="bold">Sign Out </Text></Link>)
+      :
+      (<Link to='/signin'><Text color="white" fontWeight="bold">Sign In </Text></Link>)
+    }
     </ScrollView>
     </View>
     </>)
