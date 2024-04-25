@@ -48,7 +48,8 @@ const statisticsStyles = StyleSheet.create({
 })
 
 const RepositoryItem = ({item}:{item:any}):React.JSX.Element => {
-  return <View style={styles.container}>
+  return (
+  <View  style={styles.container}>
     <View style={styles.rowContainer}>
       <Image
         style={styles.tinyLogo}
@@ -56,33 +57,33 @@ const RepositoryItem = ({item}:{item:any}):React.JSX.Element => {
           uri: 'https://github.com/'+item.fullName.split('/')[0]+'.png',
         }}
       />
-      <View style={styles.itemContainer}>
-        <Text fontWeight = 'bold'>{item.fullName}</Text>
-        <Text>{item.description}</Text>
-        <View style={styles.languageContainer}>
+      <View  style={styles.itemContainer}>
+        <Text testID="repositoryName" fontWeight = 'bold'>{item.fullName}</Text>
+        <Text testID="repositoryDescription">{item.description}</Text>
+        <View testID="repositoryLanguage" style={styles.languageContainer}>
           <Text style={styles.language}>{item.language}</Text>
         </View>
       </View>
     </View>
-    <View style={statisticsStyles.container}>
+    <View  style={statisticsStyles.container}>
       <View styles={statisticsStyles.item}>
-        <Text fontWeight = 'bold'>{numToStr1(item.stargazersCount)}</Text>
+        <Text testID="stargazersCount" fontWeight = 'bold'>{numToStr1(item.stargazersCount)}</Text>
         <Text>Stars</Text>
       </View>
       <View style={statisticsStyles.item}>
-        <Text fontWeight = 'bold'>{numToStr1(item.forksCount)}</Text>
+        <Text testID="forksCount" fontWeight = 'bold'>{numToStr1(item.forksCount)}</Text>
         <Text>Forks</Text>
       </View>
       <View style={statisticsStyles.item}>
-        <Text fontWeight = 'bold'>{numToStr1(item.reviewCount)}</Text>
+        <Text testID="reviewCount"fontWeight = 'bold'>{numToStr1(item.reviewCount)}</Text>
         <Text>Reviews</Text>
       </View>
       <View style={statisticsStyles.item}>
-        <Text fontWeight = 'bold'>{numToStr1(item.ratingAverage)}</Text>
+        <Text testID="ratingAverage" fontWeight = 'bold'>{numToStr1(item.ratingAverage)}</Text>
         <Text>Rating</Text>
       </View>
     </View>
-  </View>;
+  </View>);
 }
 
 export default RepositoryItem
