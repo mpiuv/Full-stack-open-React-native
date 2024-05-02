@@ -54,7 +54,7 @@ const UsernameAndPassword = () => {
     const { username, password } = values
     try {
       const { data } = await signIn({ username, password });
-      console.log(data);
+      //console.log(data);
       if (data.authenticate.accessToken) {
         navigate("/")
       }
@@ -68,6 +68,7 @@ const UsernameAndPassword = () => {
     validationSchema,
     onSubmit,
   });
+
 
   return (
     <View>
@@ -95,4 +96,39 @@ const UsernameAndPassword = () => {
   );
 };
 
-export default UsernameAndPassword;
+export const UsernameAndPasswordContainer = ({onSubmit}:{onSubmit:any}) =>{
+  const formik = useFormik({
+    initialValues,
+    validationSchema,
+    onSubmit,
+  });
+
+  return (
+    <View>
+    <TextInput style={formik.errors.username?styles.inputError:styles.input}
+      placeholder="Username"
+      testID="username"
+      value={formik.values.username}
+      onChangeText={formik.handleChange('username')}
+    />
+      {formik.touched.username && formik.errors.username && (
+        <Text style={{ color: '#d73a4a' }}>{formik.errors.username}</Text>
+      )}
+    <TextInput style={formik.errors.password?styles.inputError:styles.input}
+      placeholder="Password"
+      testID="password"
+      value={formik.values.password}
+      secureTextEntry={true}
+      onChangeText={formik.handleChange('password')}
+    />
+    {formik.touched.password && formik.errors.password && (
+      <Text style={{ color: '#d73a4a' }}>{formik.errors.password}</Text>
+    )}
+    <Pressable onPress={formik.handleSubmit}>
+      <Text style={styles.password}>Sign in</Text>
+    </Pressable>
+  </View>
+  );
+  }
+
+export default UsernameAndPassword ;
