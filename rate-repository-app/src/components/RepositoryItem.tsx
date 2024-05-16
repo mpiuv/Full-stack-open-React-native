@@ -1,4 +1,4 @@
-import {  View, Image, StyleSheet } from 'react-native';
+import {  View, Image, Linking, StyleSheet,Pressable } from 'react-native';
 
 import Text from './Text';
 import React from 'react';
@@ -32,6 +32,15 @@ const styles = StyleSheet.create({
   rowContainer: {
     flexDirection: 'row',
   },
+  text: {
+    backgroundColor:'blue',
+    color: "white",
+    textAlign:"center",
+    marginLeft: 10,
+    marginRight: 10,
+    paddingTop:20,
+    paddingBottom:20,
+  },
 });
 
 const statisticsStyles = StyleSheet.create({
@@ -47,7 +56,7 @@ const statisticsStyles = StyleSheet.create({
   },
 })
 
-const RepositoryItem = ({item}:{item:any}):React.JSX.Element => {
+const RepositoryItem = ({item,github}:{item:any,github:boolean}):React.JSX.Element => {
   return (
   <View  style={styles.container}>
     <View style={styles.rowContainer}>
@@ -83,6 +92,13 @@ const RepositoryItem = ({item}:{item:any}):React.JSX.Element => {
         <Text>Rating</Text>
       </View>
     </View>
+    {github && (
+        <Pressable
+          onPress={() => Linking.openURL(item.url)}
+        >
+        <Text fontWeight="bold" style={styles.text}>          Open in GitHub            </Text>
+        </Pressable>
+      )}
   </View>);
 }
 

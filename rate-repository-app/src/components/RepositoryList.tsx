@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import {  FlatList,View,StyleSheet } from 'react-native';
+import {  FlatList,View,StyleSheet,Pressable  } from 'react-native';
 import useRepositories from '../hooks/useRepositories';
 import RepositoryItem from './RepositoryItem';
+import { useNavigate } from 'react-router-native';
 
 const styles = StyleSheet.create({
   separator: {
@@ -10,19 +11,20 @@ const styles = StyleSheet.create({
 });
 
 const ItemSeparator = () => <View style={styles.separator} />;
-export const RepositoryListContainer = ({ repositories }:{repositories:any}) => {
 
-
+export const RepositoryListContainer = ({ repositories, whilePressed }:{repositories:any,whilePressed:any}) => {
   // Get the nodes from the edges array
   const repositoryNodes = repositories
-    ? repositories.edges.map((edge: { node: any; }) => edge.node)
+    ? repositories.repositories.edges.map((edge: { node: any; }) => edge.node)
     : [];
   return (
     <FlatList
       data={repositoryNodes}
       ItemSeparatorComponent={ItemSeparator}
       renderItem={({item, index, separators}:{item:any, index:any, separators:any}) => (
-        <RepositoryItem item={item}/>   
+        <Pressable onPress={() => {whilePressed(item)}}>
+          <RepositoryItem item={item} github={false}/>   
+        </Pressable>
       )}
       keyExtractor={(item:any) => item.id}
     />
@@ -31,8 +33,8 @@ export const RepositoryListContainer = ({ repositories }:{repositories:any}) => 
 
 const RepositoryList = () => {
   const { repositories } = useRepositories();
-
-  return <RepositoryListContainer repositories={repositories} />;
+  const navigate = useNavigate();
+  return <RepositoryListContainer repositories={repositories} whilePressed={(item: { id: any; }) => navigate(`/${item.id}`)} />;
 };
 
 export default RepositoryList;
