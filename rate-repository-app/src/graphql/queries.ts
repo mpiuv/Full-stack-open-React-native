@@ -47,6 +47,20 @@ ${BASE_REPOSITORY_FIELDS}
 query GetRepository($id: ID!) {
   repository(id: $id) {
     ...BaseRepositoryFields
+    reviews {
+      edges {
+        node {
+          id
+          createdAt
+          rating
+          text
+          user {
+            id
+            username
+          }
+        }
+      }
+    }  
   }
 }
 `;

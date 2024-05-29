@@ -7,27 +7,23 @@ import { numToStr1 } from "../utils"
 
 const styles = StyleSheet.create({
   container: {
+    backgroundColor:'white',
     paddingTop: 20,
-    backgroundColor:'white'
-  },
-  tinyLogo: {
-    width: 50,
-    height: 50,
   },
   itemContainer: {
     marginLeft:10
   },
   languageContainer: {
+    alignItems: 'flex-start',
     marginTop: 10,
     marginBottom: 10,
-    alignItems: 'flex-start',
   },
   language: {
-    flexGrow: 0,
-    padding: 5,
     borderRadius: 5,
     backgroundColor: theme.colors.primary,
     color: 'white',
+    flexGrow: 0,
+    padding: 5,
   },
   rowContainer: {
     flexDirection: 'row',
@@ -35,11 +31,15 @@ const styles = StyleSheet.create({
   text: {
     backgroundColor:'blue',
     color: "white",
-    textAlign:"center",
     marginLeft: 10,
     marginRight: 10,
     paddingTop:20,
     paddingBottom:20,
+    textAlign:"center",
+  },
+  tinyLogo: {
+    height: 50,
+    width: 50,
   },
 });
 
@@ -50,9 +50,9 @@ const statisticsStyles = StyleSheet.create({
     marginBottom: 5,
   },
   item: {
-    marginHorizontal: 15,
     alignItems: "center",
     justifyContent: "center",
+    marginHorizontal: 15,
   },
 })
 
@@ -93,9 +93,7 @@ const RepositoryItem = ({item,github}:{item:any,github:boolean}):React.JSX.Eleme
       </View>
     </View>
     {github && (
-        <Pressable
-          onPress={() => Linking.openURL(item.url)}
-        >
+        <Pressable onPress={() => Linking.openURL(item.url)} >
         <Text fontWeight="bold" style={styles.text}>          Open in GitHub            </Text>
         </Pressable>
       )}
