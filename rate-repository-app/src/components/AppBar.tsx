@@ -26,6 +26,7 @@ const AppBar = ():React.JSX.Element => {
   return (<><View style={styles.container}>
     <ScrollView horizontal showsHorizontalScrollIndicator={false}>
     <Link to='/'><Text color="white" fontWeight="bold">Repositories </Text></Link>
+    {!loading && data.me ?(<Link to="/review"><Text color="white" fontWeight="bold">Create a review </Text></Link>):<></>}
     {!loading && data.me ? 
       (<Link to='/' onPress={signOut}><Text color="white" fontWeight="bold">Sign Out </Text></Link>)
       :

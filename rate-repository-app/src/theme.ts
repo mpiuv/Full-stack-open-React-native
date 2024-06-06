@@ -6,7 +6,9 @@ const theme = {
       textSecondary: '#586069',
       primary: '#0366d6',
       appBackGround: '#0d0c1d',
-      white: '#FFFFFF'
+      white: '#FFFFFF',
+      blue: '#0000FF',
+      error: '#db4b4b',
     },
     fontSizes: {
       body: 14,
