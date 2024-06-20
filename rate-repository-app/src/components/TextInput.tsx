@@ -1,7 +1,6 @@
 import { useField, useFormik } from 'formik';
 import { TextInput as NativeTextInput, StyleSheet } from 'react-native';
 import theme from '../theme';
-import Text from './Text';
 
 const styles = StyleSheet.create({  
   errorText: {
@@ -24,11 +23,8 @@ const styles = StyleSheet.create({
   },
 });
 
-
-const TextInput = ({ style, error, name,  ...props }:{name:string}) => {
+const TextInput = ({ style, error, name,  ...props }:{name:string, style:any, error:string}) => {
   const formik = useFormik({});
-
-  const textInputStyle = [style];
   const [field, meta, helpers] = useField(name);
   const showError = meta.touched && meta.error;
 
@@ -39,9 +35,6 @@ const TextInput = ({ style, error, name,  ...props }:{name:string}) => {
     value={field.value}
     error={showError}
     {...props} />
-    {showError && <Text style={styles.errorText}>{meta.error}</Text>}
   </>
-
 };
-
 export default TextInput;

@@ -30,7 +30,9 @@ const AppBar = ():React.JSX.Element => {
     {!loading && data.me ? 
       (<Link to='/' onPress={signOut}><Text color="white" fontWeight="bold">Sign Out </Text></Link>)
       :
-      (<Link to='/signin'><Text color="white" fontWeight="bold">Sign In </Text></Link>)
+      <><Link to='/signin'><Text color="white" fontWeight="bold">Sign In </Text></Link>
+       <Link to="/sign-up"><Text color="white" fontWeight="bold">Sign up</Text></Link>
+      </>
     }
     </ScrollView>
     </View>

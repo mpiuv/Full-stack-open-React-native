@@ -8,6 +8,7 @@ import RepositoryList from './RepositoryList';
 import SignIn from './SignIn';
 import Review from './Review';
 import SingleRepository from './SingleRepository';
+import SignUp from './SignUp';
 
 const styles1 = StyleSheet.create({
   container: {
@@ -24,6 +25,7 @@ const Main = ():React.JSX.Element => {
       <Routes>
         <Route path="/" element={<RepositoryList />} />
         <Route path="/signin" element={<SignIn />} />
+        <Route path="/sign-up" element={<SignUp/>} />
         <Route path="/review" element={<Review />} />
         <Route path="/:id" element={<SingleRepository />} />
         <Route path="*" element={<Navigate to="/" replace />} />

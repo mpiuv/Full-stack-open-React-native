@@ -51,7 +51,7 @@ const validationSchema = yup.object().shape({
 });
 
 
-const Review = () => {
+const Review = ():React.JSX.Element => {
   const navigate = useNavigate();
   const [mutate] = useMutation(CREATE_REVIEW);
   

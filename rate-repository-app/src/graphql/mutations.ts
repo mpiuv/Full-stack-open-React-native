@@ -15,14 +15,26 @@ mutation addReview ( $repositoryName: String!, $ownerName: String!, $rating: Int
     }
     repository {
       id
-      ownerName
       name
+      ownerName
     }
+    createdAt
     userId
     repositoryId
     rating
-    createdAt
     text
+  }
+}
+`;
+
+export const CREATE_USER = gql`
+mutation signUp ( $username: String!, $password: String!) {
+  createUser( user: {
+    username: $username,
+    password: $password
+  }) {
+    id
+    username
   }
 }
 `;
