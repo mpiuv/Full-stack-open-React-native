@@ -15,24 +15,6 @@ export const BASE_REPOSITORY_FIELDS = gql`
   }
 `;
 
-export const GET_REPOSITORIES = gql`
-query Edges {
-  repositories {
-    edges {
-      node {
-        id
-        fullName
-        language
-        stargazersCount
-        forksCount
-        reviewCount
-        ratingAverage
-      }
-    }
-  }
-}
-`;
-
 export const ME = gql`
   query {
     me {
@@ -63,4 +45,22 @@ query GetRepository($id: ID!) {
     }  
   }
 }
+`;
+
+export const GET_REPOSITORIES = gql`
+  query GetOrderedRepositories($orderBy: AllRepositoriesOrderBy, $orderDirection: OrderDirection) {
+    repositories(orderBy: $orderBy, orderDirection: $orderDirection) {
+      edges {
+        node {
+        id
+        fullName
+        language
+        stargazersCount
+        forksCount
+        reviewCount
+        ratingAverage
+       }
+      }
+    } 
+  }
 `;
