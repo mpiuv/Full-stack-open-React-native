@@ -12,7 +12,7 @@ const styles = StyleSheet.create({
   },
 });
 
-const ItemSeparator = ():React.JSX.Element => <View style={styles.separator} />;
+export const ItemSeparator = ():React.JSX.Element => {return (<View style={styles.separator} />)};
 
 const RepositoryListContainer = ({repositories, header, whilePressed  }:
   {repositories:any,header:React.JSX.Element, whilePressed:any}):React.JSX.Element => {
@@ -76,6 +76,10 @@ const RepositoryList = (): React.JSX.Element => {
 
   const ordering1 = getOrderBy(ordering);
   const data =  useRepositories(ordering1, debouncedText.text);
+  if (!data) {
+    // Handle error, show message, or fallback logic
+    return <Text>Error: Failed to fetch data</Text>;
+  }
   const repositories=data.repositories
   
   const navigate = useNavigate();

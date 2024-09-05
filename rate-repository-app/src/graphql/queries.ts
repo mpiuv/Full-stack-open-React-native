@@ -16,10 +16,31 @@ export const BASE_REPOSITORY_FIELDS = gql`
 `;
 
 export const ME = gql`
-  query {
+  query getCurrentUser($includeReviews: Boolean = false) {
     me {
       username
       id
+      reviews @include(if: $includeReviews) {
+        edges {
+          node {
+            rating
+            text
+            createdAt
+            id
+            repository{
+              fullName
+              id
+             }
+          }
+          cursor
+        }
+        pageInfo {
+          endCursor
+          hasNextPage
+          hasPreviousPage
+          startCursor
+        }
+      }
     }
   }
 `;

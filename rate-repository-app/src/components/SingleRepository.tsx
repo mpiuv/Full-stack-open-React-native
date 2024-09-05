@@ -7,6 +7,7 @@ import { format } from 'date-fns'
 import { Card } from '@rneui/themed';
 import theme from '../theme'
 import { useParams } from 'react-router-native';
+import React from 'react';
 
 const ratingDimension = 40;
 const styles = StyleSheet.create({
@@ -49,7 +50,7 @@ const ARepository = ({repository}:{repository:any}):React.JSX.Element => {
   return <RepositoryItem item={repository} github={true}/>;
 };
 
-const ReviewItem = ({ review }:{review:any}):React.JSX.Element => {
+export const ReviewItem = ({ review }:{review:any}):React.JSX.Element => {
   return (
   <Card >
   <View style={{flexDirection: 'row', }}> 
@@ -69,9 +70,33 @@ const ReviewItem = ({ review }:{review:any}):React.JSX.Element => {
 </Card>)
 };
 
+export const ReviewItemForUser = ({ review }:{review:any}):React.JSX.Element => {
+  return (
+  <Card >
+  <View style={{flexDirection: 'row', }}> 
+    <View>
+      <Text style={styles.rating}>
+        {review.rating}
+      </Text>
+    </View>
+    <View style={{ flexShrink: 1,flexDirection: 'column', }}>
+      <View  style={styles.author}>
+        <Text fontWeight = 'bold'>{review.repository.fullName}</Text>
+        <Text secondary>{format(new Date(review.createdAt),'dd.MM.yyyy')}</Text>
+      </View>
+        <Text>{review.text}</Text>
+     </View>
+   </View>
+</Card>)
+};
+
 const SingleRepository = ():React.JSX.Element => {
   const {id} = useParams();
-  const {data} = useQuery(GET_REPOSITORY, {variables:{id}});
+  const {data, error} = useQuery(GET_REPOSITORY, {variables:{id}});
+  if (error) {
+    console.error(`Error fetching repository data: ${error.message}`);
+    return <Text>Error fetching data</Text>;
+  }
   if (!data)  return <></>;
   const repository=data.repository;
   return (
@@ -80,6 +105,7 @@ const SingleRepository = ():React.JSX.Element => {
       renderItem={({ item}:{item:string }) => <ReviewItem review={item} />}
       keyExtractor={({ id }:{id:string }) => id}
       ListHeaderComponent={() => <ARepository repository={repository} />}
+      ListEmptyComponent={() => <Text>No reviews available</Text>}
     />
   );
 };

@@ -56,9 +56,10 @@ const UsernameAndPassword = () => {
     const { username, password } = values
     try {
       const { data } = await signIn({ username, password });
-      if (data.authenticate.accessToken) {
-        navigate("/")
-      }
+      if (data.authenticate.accessToken)
+        navigate("/", { replace: true })
+      else
+        console.log("Sign-in failure")
     } catch (e) {
       console.log(e);
     }
