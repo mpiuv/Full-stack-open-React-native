@@ -50,7 +50,16 @@ const ARepository = ({repository}:{repository:any}):React.JSX.Element => {
   return <RepositoryItem item={repository} github={true}/>;
 };
 
-export const ReviewItem = ({ review }:{review:any}):React.JSX.Element => {
+/**
+ * Renders a single review with rating, author, and text. The author is a username,
+ * and the text is the review text.
+ *
+ * @param {object} props
+  * @returns {React.JSX.Element}
+ */
+export const ReviewItem = ({ review }:
+  { review: any }):
+  React.JSX.Element => {
   return (
   <Card >
   <View style={{flexDirection: 'row', }}> 
@@ -92,7 +101,7 @@ export const ReviewItemForUser = ({ review }:{review:any}):React.JSX.Element => 
 
 const SingleRepository = ():React.JSX.Element => {
   const {id} = useParams();
-  const {data, error} = useQuery(GET_REPOSITORY, {variables:{id}});
+  const {data, error} = useQuery(GET_REPOSITORY, {variables:{id},pollInterval: 500,});
   if (error) {
     console.error(`Error fetching repository data: ${error.message}`);
     return <Text>Error fetching data</Text>;
@@ -102,12 +111,11 @@ const SingleRepository = ():React.JSX.Element => {
   return (
     <FlatList
       data={repository.reviews.edges}
-      renderItem={({ item}:{item:string }) => <ReviewItem review={item} />}
-      keyExtractor={({ id }:{id:string }) => id}
+      renderItem={({ item}:{item:any }) => <ReviewItem review={item} />}
+      keyExtractor={( item :{node:{id:string}} ) => item.node.id}
       ListHeaderComponent={() => <ARepository repository={repository} />}
       ListEmptyComponent={() => <Text>No reviews available</Text>}
     />
   );
 };
-
 export default SingleRepository;

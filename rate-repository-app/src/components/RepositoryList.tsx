@@ -14,8 +14,23 @@ const styles = StyleSheet.create({
 
 export const ItemSeparator = ():React.JSX.Element => {return (<View style={styles.separator} />)};
 
-const RepositoryListContainer = ({repositories, header, whilePressed  }:
-  {repositories:any,header:React.JSX.Element, whilePressed:any}):React.JSX.Element => {
+/**
+ * A component that renders a FlatList of RepositoryItems.
+ *
+ * @param {{
+  *   header: React.ReactElement,
+  * }} props
+ * @returns {React.ReactElement} A FlatList of RepositoryItems
+ */
+const RepositoryListContainer = ({
+  repositories,
+  header,
+  whilePressed,
+}: {
+  repositories: Array<{ node:any }> | null;
+  header: React.ReactElement;
+  whilePressed: (item: any) => void;
+}): React.ReactElement => {
   const repositoryNodes = repositories
     ? repositories.edges.map((edge: { node: any }) => edge.node)
     : [];
@@ -23,13 +38,13 @@ const RepositoryListContainer = ({repositories, header, whilePressed  }:
     <FlatList
       data={repositoryNodes}
       ItemSeparatorComponent={ItemSeparator}
-      renderItem={({item, index, separators}:{item:any, index:any, separators:any}) => (
-        <Pressable onPress={() => {whilePressed(item)}}>
-          <RepositoryItem item={item} github={false}/>
-        </Pressable>)
-      }
+      renderItem={({ item, index, separators }) => (
+        <Pressable onPress={() => { whilePressed(item) }}>
+          <RepositoryItem item={item} github={false} />
+        </Pressable>
+      )}
       ListHeaderComponent={header}
-      keyExtractor={(item:any) => item.id}
+      keyExtractor={(item) => item.id}
     />
   );
 };
@@ -63,7 +78,10 @@ const RepositoryList = (): React.JSX.Element => {
   const [searchKeyword, setSearchKeyword] = useState<string>('');
   const [debouncedText] = useDebounce(searchKeyword, 500);
   
-  const getOrderBy = (value: string) => {
+  const getOrderBy = (value: string | null | undefined): { orderBy: string; orderDirection: string } => {
+    if (value === null || value === undefined) {
+      throw new Error('value is null or undefined');
+    }
     switch (value) {
       case 'highest':
         return { orderBy: "RATING_AVERAGE", orderDirection: "DESC" };
@@ -94,7 +112,7 @@ const RepositoryList = (): React.JSX.Element => {
 });
 
   return(
-    <RepositoryListContainer  repositories={repositories} whilePressed={(item: { id:any })=> navigate(`/${item.id}`)} header={
+    <RepositoryListContainer  repositories={repositories} whilePressed={(item: { id:string, node:any })=> navigate(`/${item.id}`)} header={
       <View style={styles.container}>
         <TextInput
           value={searchKeyword}
@@ -112,7 +130,6 @@ const RepositoryList = (): React.JSX.Element => {
       </Picker>
       </View>
     } />
-  );
-}
+  );}
 
 export default RepositoryList

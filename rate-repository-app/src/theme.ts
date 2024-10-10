@@ -8,6 +8,7 @@ const theme = {
       appBackGround: '#0d0c1d',
       white: '#FFFFFF',
       blue: '#0000FF',
+      red: '#FF0000',
       error: '#db4b4b',
     },
     fontSizes: {

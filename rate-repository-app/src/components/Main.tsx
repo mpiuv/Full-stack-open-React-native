@@ -6,7 +6,7 @@ import theme from '../theme';
 import React from 'react';
 import RepositoryList from './RepositoryList';
 import SignIn from './SignIn';
-import Review from './Review';
+import CreateReview from './CreateReview';
 import SingleRepository from './SingleRepository';
 import SignUp from './SignUp';
 import MyReviews from './MyReviews';
@@ -28,7 +28,7 @@ const Main = ():React.JSX.Element => {
         <Route path="/signin" element={<SignIn />} key="signIn"/>
         <Route path="/sign-up" element={<SignUp/>} key="signUp"/>
         <Route path="/myreviews" element={<MyReviews />} key="myReviews"/>
-        <Route path="/review" element={<Review  />} key="review"/>
+        <Route path="/review" element={<CreateReview  />} key="review"/>
         <Route path="/:id" element={<SingleRepository  />} key="singleRepository"/>
         <Route path="*" element={<Navigate to="/" replace />}key="navigate"/>
       </Routes>

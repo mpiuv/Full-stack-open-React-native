@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
 type colorT='textSecondary'|'primary'|'white'|'black';
 
 const Text = ({ color, fontSize, fontWeight, style, ...props }:
-              {color?:colorT, fontSize?:any, fontWeight?:any, style?:any}):React.FC => {
+              {color?:colorT, fontSize?:any, fontWeight?:any, style?:any}):React.JSX.Element => {
   const textStyle = [
     styles.text,
     color === 'textSecondary' && styles.colorTextSecondary,
